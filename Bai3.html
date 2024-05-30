@@ -1,0 +1,140 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sổ tiết kiệm</title>
+    </head>
+    <body>
+    <h3>Sổ tiết kiệm</h3>
+    <table border="1" style="border-collapse: collapse">
+        <thead>
+        <tr>
+<!--            <th>STT</th>-->
+            <th>ID</th>
+            <th>TypeTk</th>
+            <th>Name</th>
+            <th>CMND</th>
+            <th>Date</th>
+            <th>Money</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="printf">
+        </tbody>
+    </table>
+
+    <button onclick="addNewSo()">Add New So</button>
+
+    <script>
+        class SOTIETKIEM {
+            constructor(id, typeTk, name, cmnd, date, money) {
+                this.id = id;
+                this.typeTk = typeTk;
+                this.name = name;
+                this.cmnd = cmnd;
+                this.date = date;
+                this.money = money;
+            }
+
+            getId(){
+                return this.id;
+            }
+            setId (id){
+                this.id = id;
+            }
+
+            getTypeTk() {
+                return this.typeTk;
+            }
+            setTypeTk (typeTk) {
+                this.typeTk = typeTk;
+            }
+
+            getName() {
+                return this.name;
+            }
+            setName(name) {
+                this.name = name;
+            }
+
+            getCMND() {
+                return this.cmnd;
+            }
+            setCMND(cmn) {
+                this.cmnd = cmnd;
+            }
+
+            getDate() {
+                return this.date;
+            }
+            setDate(date) {
+                this.date = date;
+            }
+
+            getMoney() {
+                return this.money;
+            }
+            setMoney(money) {
+                this.money = money;
+            }
+
+            getInfo (){
+                return "ID " + this.id + ", Loại tiết kiệm: " + this.TypeTk + ", Họ tên khách hàng: " + this.name + ", Chứng minh nhân dân: " + this.cmnd + ", Ngày mở sổ: " + this.date + ", Số tiền gửi: " + this.money + "triệu";
+            }
+        }
+
+        let So = new SOTIETKIEM(1, "Có kỳ hạn", "Phạm Thị Lan", "10023386", "30/05/2013", 80);
+        let So1 = new SOTIETKIEM(2, "Có kỳ hạn", "Khuất Văn Vũ", "1507655", "25/01/2019", 90);
+        let So2 = new SOTIETKIEM(3, "Không kỳ hạn", "Đào Minh Anh", "203937370", "26/09/2016", 100);
+
+        let array = [So, So1, So2];
+
+        function validateForm() {
+            let id = document.getElementById("id").value;
+            let typeTk = document.getElementById("type")
+            let name = document.getElementById("name").value;
+            let cmnd = document.getElementById("cmnd")
+            let date = document.getElementById("date").value;
+            let money = document.getElementById("money").value;
+            if (id === "" || typeTk === "" || name === "" || cmnd === "" || date === "" || money === "") {}
+
+        function printf() {
+            let str = " ";
+            for (let i = 0; i < array.length; i++) {
+                str += "<tr>"
+                // str += "<td>" + (i + 1) + "</td>"
+                str += "<td>" + array[i].id + "</td>";
+                str += "<td>" + array[i].typeTk + "</td>";
+                str += "<td>" + array[i].name + "</td>";
+                str += "<td>" + array[i].cmnd + "</td>";
+                str += "<td>" + array[i].date + "</td>";
+                str += "<td>" + array[i].money + "</td>";
+                str+="<td><button onclick='deleteSo("+ i +")'>Delete</button></td>"
+                str += "</tr>";
+            }
+            document.getElementById("printf").innerHTML = str;
+        }
+
+        function addNewSo() {
+            let id = +prompt("Nhập id sổ mới:");
+            let typeTk = prompt("Nhập loại tiết kiệm:");
+            let name = prompt("Nhập tên khách hàng mới:");
+            let cmnd = +prompt("Nhập CMND mới:");
+            let date = +prompt("Nhập ngày mở sổ:");
+            let money = +prompt("Nhập số tiền gửi:");
+            let newSo = new So(id, typeTk, name, cmnd, date, money);
+            array.push(newSo);
+            printf();
+        }
+
+        function deleteSo (index){
+            let check = confirm('Bạn có chắc chắn muốn xoá không?');
+            if(check){
+                array.splice(index, 1);
+            }
+            printf();
+        }
+        printf();
+    </script>
+    </body>
+    </html>

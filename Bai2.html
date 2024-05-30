@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 3</title>
+</head>
+<body>
+<script>
+    function areEqual(tu1, mau1, tu2, mau2) {
+        if (mau1 === 0 || mau2 === 0) {
+            return false;
+        }
+
+        let c1 = UCLN(tu1, mau1);
+        tu1 /= c1;
+        mau1 /= c1;
+
+        let c2 = UCLN(tu2, mau2);
+        tu2 /= c2;
+        mau2 /= c2;
+
+        return tu1 === tu2 && mau1 === mau2;
+    }
+
+    function UCLN(a, b) {
+        while (b !== 0) {
+            let temp = a;
+            a = b;
+            b = temp % b;
+        }
+        return a;
+    }
+
+    let tu1 = parseInt(prompt("Tử số 1: "));
+    let mau1 = parseInt(prompt("Mẫu số 1: "));
+
+    let tu2 = parseInt(prompt("Tử số 2: "));
+    let mau2 = parseInt(prompt("Mẫu số 2: "));
+
+    if (areEqual(tu1, mau1, tu2, mau2)) {
+        document.write("True");
+    } else {
+        document.write("false");
+    }
+
+</script>
+</body>
+</html>
